@@ -1,0 +1,58 @@
+import {
+    GET_START,
+    GET_SUCCESS,
+    GET_FAILURE,
+    POST_START,
+    POST_SUCCESS,
+    POST_FAILURE
+} from '../actions/apiActions';
+
+const initialState = {
+    smurfs: [],
+    isFetching: false,
+    message: ''
+};
+
+export const rootReducer = (state = initialState, action) => {
+    switch (action.type) {
+        case GET_START:
+            return {
+                ...state,
+                isFetching: true,
+                message: 'Getting Smurfs...'
+            };
+        case GET_SUCCESS:
+            return {
+                ...state,
+                smurfs: action.payload,
+                isFetching: false,
+                message: ''
+            };
+        case GET_FAILURE:
+            return {
+                ...state,
+                message: `${action.payload}`,
+                isFetching: false
+            };
+        case POST_START:
+            return {
+                ...state,
+                isFetching: true,
+                message: 'Adding Smurf...'
+            };
+        case POST_SUCCESS:
+            return {
+                ...state,
+                isFetching: false,
+                message: ''
+            };
+        case POST_FAILURE:
+            return {
+                ...state,
+                message: `${action.payload}`,
+                isFetching: false
+            };
+        default:
+            return state;
+    }
+};
