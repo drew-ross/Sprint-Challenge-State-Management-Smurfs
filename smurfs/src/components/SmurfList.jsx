@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { getData } from '../actions/apiActions';
-
+import Smurf from './Smurf';
 
 const SmurfList = ({ smurfs, message, getData }) => {
 
@@ -14,7 +14,7 @@ const SmurfList = ({ smurfs, message, getData }) => {
             <div className="smurf-list">
                 {smurfs.length > 0 &&
                     smurfs.map(smurf => (
-                        <p>{smurf.name}</p>
+                        <Smurf smurf={smurf} />
                     ))}
             </div>
             <div className="api-message">

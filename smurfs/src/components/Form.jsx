@@ -23,13 +23,13 @@ const Form = ({ postData }) => {
         e.preventDefault();
         const post = {
             ...formValues,
-            id: Date.now()
+            height: `${formValues.height}cm`
         }
         postData(post);
     };
 
     return (
-        <div>
+        <div className='form'>
             <form onSubmit={handleSubmit}>
                 <label>Name:
                     <input
