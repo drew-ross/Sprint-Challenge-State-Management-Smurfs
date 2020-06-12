@@ -18,18 +18,38 @@ export const rootReducer = (state = initialState, action) => {
         case GET_START:
             return {
                 ...state,
-                isFetching: true
+                isFetching: true,
+                message: 'Getting Smurfs...'
             };
         case GET_SUCCESS:
             return {
                 ...state,
                 smurfs: action.payload,
-                isFetching: false
+                isFetching: false,
+                message: ''
             };
         case GET_FAILURE:
             return {
                 ...state,
-                message: action.payload,
+                message: `${action.payload}`,
+                isFetching: false
+            };
+        case POST_START:
+            return {
+                ...state,
+                isFetching: true,
+                message: 'Adding Smurf...'
+            };
+        case POST_SUCCESS:
+            return {
+                ...state,
+                isFetching: false,
+                message: ''
+            };
+        case POST_FAILURE:
+            return {
+                ...state,
+                message: `${action.payload}`,
                 isFetching: false
             };
         default:

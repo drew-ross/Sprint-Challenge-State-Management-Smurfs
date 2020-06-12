@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { postData } from '../actions/apiActions';
 
 const initialFormValues = {
     name: '',
@@ -6,7 +8,7 @@ const initialFormValues = {
     height: 0,
 };
 
-const Form = () => {
+const Form = ({ postData }) => {
 
     const [formValues, setFormValues] = useState(initialFormValues);
 
@@ -17,18 +19,27 @@ const Form = () => {
         });
     };
 
+    const handleSubmit = e => {
+        e.preventDefault();
+        const post = {
+            ...formValues,
+            id: Date.now()
+        }
+        postData(post);
+    };
+
     return (
         <div>
-            <form>
-                <label>Name: 
+            <form onSubmit={handleSubmit}>
+                <label>Name:
                     <input
                         name='name'
                         value={formValues.name}
                         onChange={handleChange}
                     />
                 </label>
-                <br/>
-                <label>Age: 
+                <br />
+                <label>Age:
                     <input
                         name='age'
                         type='number'
@@ -36,7 +47,7 @@ const Form = () => {
                         onChange={handleChange}
                     />
                 </label>
-                <br/>
+                <br />
                 <label>Height
                     <input
                         name='height'
@@ -45,9 +56,11 @@ const Form = () => {
                         onChange={handleChange}
                     />cm
                 </label>
+                <br />
+                <button>Submit</button>
             </form>
         </div>
     );
 };
 
-export default Form;
+export default connect(null, { postData })(Form);

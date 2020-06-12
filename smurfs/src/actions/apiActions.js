@@ -16,3 +16,14 @@ export const getData = () => dispatch => {
         .then(res => dispatch({ type: GET_SUCCESS, payload: res.data }))
         .catch(err => dispatch({ type: GET_FAILURE, payload: err }));
 };
+
+export const postData = postData => dispatch => {
+    dispatch({ type: GET_START });
+    axios
+        .post(API_URL, postData)
+        .then(res => {
+            dispatch({ type: GET_SUCCESS, payload: res.data });
+            getData();
+        })
+        .catch(err => dispatch({ type: GET_FAILURE, payload: err }));
+};
