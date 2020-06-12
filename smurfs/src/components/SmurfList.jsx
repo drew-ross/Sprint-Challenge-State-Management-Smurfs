@@ -1,12 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { getData } from '../actions/apiActions';
 
-const SmurfList = () => {
+
+const SmurfList = ({ smurfs, getData }) => {
+
+    useEffect(() => {
+        getData();
+    }, [])
 
     return (
         <div>
-            <p>List</p>
+            {smurfs.length > 0 &&
+                smurfs.map(smurf => (
+                    <p>{smurf.name}</p>
+                ))}
         </div>
-    )
-}
+    );
+};
 
-export default SmurfList;
+const mapStateToProps = state => {
+    return {
+        smurfs: state.smurfs
+    };
+};
+
+export default connect(mapStateToProps, { getData })(SmurfList);
